@@ -70,7 +70,7 @@ func (f *Fetcher) SimulateOdds() []models.OddsUpdate {
 
 	for _, game := range games {
 		// Generate slightly different odds for each bookmaker
-		baseHome := 1.8 + rand.Float64()*0.6  // 1.8 to 2.4
+		baseHome := 1.8 + rand.Float64()*0.6 // 1.8 to 2.4
 		baseAway := 1.8 + rand.Float64()*0.6
 
 		// Add bookmaker-specific variation
@@ -91,15 +91,15 @@ func (f *Fetcher) SimulateOdds() []models.OddsUpdate {
 		eventID := fmt.Sprintf("%s-vs-%s", strings.ToLower(game.home), strings.ToLower(game.away))
 
 		odds = append(odds, models.OddsUpdate{
-			ID:        uuid.New().String(),
-			EventID:   eventID,
-			Sport:     sports[rand.Intn(len(sports))],
-			HomeTeam:  game.home,
-			AwayTeam:  game.away,
-			Bookmaker: f.sportsbook,
-			HomeOdds:  baseHome + variation,
-			AwayOdds:  baseAway - variation,
-			Timestamp: time.Now(),
+			ID:         uuid.New().String(),
+			EventID:    eventID,
+			Sport:      sports[rand.Intn(len(sports))],
+			HomeTeam:   game.home,
+			AwayTeam:   game.away,
+			Bookmaker:  f.sportsbook,
+			HomeOdds:   baseHome + variation,
+			AwayOdds:   baseAway - variation,
+			Timestamp:  time.Now(),
 			MarketType: "moneyline",
 		})
 	}
